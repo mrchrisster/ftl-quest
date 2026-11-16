@@ -98,6 +98,11 @@ Debug helpers: `adb shell touch /sdcard/Android/data/io.github.mrchrisster.ftlqu
 ## Credits
 
 - *FTL: Faster Than Light* by Subset Games. Buy it, it's wonderful.
+- Based on [ftl-android](https://github.com/Sidd065/ftl-android) by Sidd065, the Android port of FTL for iPad (GPL-3.0). This VR edition builds on that work; thank you!
 - The diorama layering and OpenXR quad stack were inspired by the WarioWare: Twisted! and Mother 3 GBA recomp Quest ports.
 - Logo: original artwork made for this port (`tools/branding/make_logo.py`).
 - OpenXR loader © The Khronos Group (Apache-2.0), downloaded at build time.
+
+## License
+
+GPL-3.0, see [LICENSE](LICENSE), the same license as [ftl-android](https://github.com/Sidd065/ftl-android), which this port builds on. The license covers this repository's code only. FTL itself, its art and data belong to Subset Games and are not included.
