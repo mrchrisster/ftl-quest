@@ -42,6 +42,22 @@
             </intent-filter>
             <meta-data android:name="com.oculus.vr.intent.category.IMMERSIVE_HMD" android:value="true" />
         </activity>
+        <!-- First-run import of the player's own FTL for iPad (.ipa / zip of FTL.app); 2D panel. -->
+        <activity
+            android:name=".SetupActivity"
+            android:exported="true"
+            android:label="FTL setup"
+            android:configChanges="density|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|uiMode">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/zip" />
+                <data android:mimeType="application/x-ios-app" />
+                <data android:mimeType="application/x-itunes-ipa" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

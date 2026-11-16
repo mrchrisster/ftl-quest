@@ -1,6 +1,7 @@
 package com.subsetgames.ftl;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.InputDevice;
 import android.view.KeyEvent;
@@ -47,6 +48,12 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!SetupActivity.gameFilesPresent(this)) {
+            // First run (or files removed): import the player's own FTL copy in a 2D panel.
+            startActivity(new Intent(this, SetupActivity.class));
+            finish();
+            return;
+        }
         nativeSetActivity(this); // OpenXR loader/instance need the Activity (immersive mode)
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 

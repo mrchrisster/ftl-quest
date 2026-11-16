@@ -46,17 +46,23 @@ The idea comes from the GBA diorama ports (WarioWare: Twisted!, Mother 3), appli
 
 ## Install
 
-You need a Meta Quest headset in developer mode (developed on Quest 3; Quest 2, 3S and Pro should work too), `adb`, and your own FTL iOS app (`.ipa`, version 1.6.21).
+You need a Meta Quest headset with developer mode on (developed on Quest 3; Quest 2, 3S and Pro should work too) and your own copy of **FTL for iPad 1.6.21** as a decrypted `.ipa` (or a zip of `FTL.app`). Copies downloaded straight from the App Store are encrypted and won't run; the app checks this and tells you.
 
-1. **Install the APK** from [Releases](../../releases):
+1. **Install the APK** from [Releases](../../releases) with SideQuest, or:
    ```bash
    adb install -r ftl-quest.apk
    ```
-2. **Copy your game files to the headset.** The helper extracts the game binary (`FTL`) and `ftl.dat` from your IPA and pushes them to `/sdcard/Android/data/com.subsetgames.ftl/files/`:
-   ```bash
-   python3 tools/deploy_quest.py path/to/FTL.ipa
-   ```
-3. Launch **FTL: Faster Than Light** from your Quest library. It's tagged as a game; sideloaded apps also always appear under *Unknown Sources*.
+2. **Put your `.ipa` on the headset**, for example in the *Download* folder over USB.
+3. **Launch FTL: Faster Than Light** from your library (also listed under *Unknown Sources*). On first launch a setup panel asks you to pick your `.ipa`. The app extracts the game executable and `ftl.dat` itself, then starts the game in VR.
+
+Updating is just installing a newer APK over the old one; your game files and saves are kept.
+
+<details><summary>Developer route (adb, no picker)</summary>
+
+```bash
+python3 tools/deploy_quest.py path/to/FTL.ipa   # extracts FTL + ftl.dat and pushes them to the headset
+```
+</details>
 
 ## Build from source
 
