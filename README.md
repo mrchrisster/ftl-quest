@@ -4,6 +4,10 @@
 
 The idea comes from the GBA diorama ports (WarioWare: Twisted!, Mother 3), applied to a full 2D strategy game.
 
+[![Gameplay video: FTL as a VR diorama on Quest 3](https://img.youtube.com/vi/0G6g1veP704/maxresdefault.jpg)](https://youtu.be/0G6g1veP704)
+
+▶ **[Watch the gameplay video](https://youtu.be/0G6g1veP704)**
+
 ![Combat on Quest 3](docs/media/combat.jpg)
 
 ![The five depth layers](docs/media/diorama_layers.jpg)
