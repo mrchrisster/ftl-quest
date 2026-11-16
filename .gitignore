@@ -1,0 +1,30 @@
+# Android / Gradle build outputs
+android/.gradle/
+android/app/build/
+android/local.properties
+*.apk
+*.aab
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Large game assets (extracted from legal IPA)
+workspace/inputs/ftl.dat
+*.ipa
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Native build cache / mod packs
+android/app/.cxx/
+*.ftl
+workspace/deploy.log
+workspace/captures/
+
+# Never publish game-derived files
+workspace/inputs/
+decomp/
+android/build/
+deps/
