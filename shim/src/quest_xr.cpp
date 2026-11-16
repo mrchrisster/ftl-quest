@@ -728,14 +728,14 @@ int quest_xr_present(void) {
     // adb test hooks: files/.xr_depth ("0"|"1"|"2"), files/.xr_recenter
     static int s_poll = 0;
     if ((s_poll++ % 30) == 0) {
-        const char *dp = "/sdcard/Android/data/com.subsetgames.ftl/files/.xr_depth";
+        const std::string dp_s = std::string(darwin_files_dir()) + "/.xr_depth"; const char *dp = dp_s.c_str();
         if (FILE *f = fopen(dp, "r")) {
             int m = -1;
             if (fscanf(f, "%d", &m) == 1 && m >= 0 && m <= 2) { g.depth_mode = m; LOGI("Depth mode -> %d (file)", m); }
             fclose(f);
             unlink(dp);
         }
-        const char *rp = "/sdcard/Android/data/com.subsetgames.ftl/files/.xr_recenter";
+        const std::string rp_s = std::string(darwin_files_dir()) + "/.xr_recenter"; const char *rp = rp_s.c_str();
         if (access(rp, F_OK) == 0) { unlink(rp); g.pose_init = false; g.recenter_frames = 6; g.recenter_after = 0; }
     }
     XrFrameBeginInfo bi{XR_TYPE_FRAME_BEGIN_INFO};

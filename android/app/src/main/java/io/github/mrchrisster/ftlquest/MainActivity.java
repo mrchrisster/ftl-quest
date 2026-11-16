@@ -1,4 +1,4 @@
-package com.subsetgames.ftl;
+package io.github.mrchrisster.ftlquest;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -99,8 +99,8 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
             public void run() {
                 File internalDir = getFilesDir();
                 File externalDir = getExternalFilesDir(null);
-                String internalPath = internalDir != null ? internalDir.getAbsolutePath() : "/data/data/com.subsetgames.ftl/files";
-                String externalPath = externalDir != null ? externalDir.getAbsolutePath() : "/sdcard/Android/data/com.subsetgames.ftl/files";
+                String internalPath = internalDir != null ? internalDir.getAbsolutePath() : "/data/data/io.github.mrchrisster.ftlquest/files";
+                String externalPath = externalDir != null ? externalDir.getAbsolutePath() : "/sdcard/Android/data/io.github.mrchrisster.ftlquest/files";
                 nativeInit(null, internalPath, externalPath);
             }
         }, 300);
@@ -190,8 +190,8 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
         File internalDir = getFilesDir();
         File externalDir = getExternalFilesDir(null);
 
-        String internalPath = internalDir != null ? internalDir.getAbsolutePath() : "/data/data/com.subsetgames.ftl/files";
-        String externalPath = externalDir != null ? externalDir.getAbsolutePath() : "/sdcard/Android/data/com.subsetgames.ftl/files";
+        String internalPath = internalDir != null ? internalDir.getAbsolutePath() : "/data/data/io.github.mrchrisster.ftlquest/files";
+        String externalPath = externalDir != null ? externalDir.getAbsolutePath() : "/sdcard/Android/data/io.github.mrchrisster.ftlquest/files";
 
         nativeInit(holder.getSurface(), internalPath, externalPath);
 

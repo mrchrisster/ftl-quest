@@ -194,6 +194,7 @@ void darwin_planes_frame_boundary();
 bool darwin_planes_enabled();
 void darwin_dump_planes(const char *dir, int frame);
 void darwin_trace_request();
+const char *darwin_files_dir(); // app's external files dir (game files, saves, debug triggers)
 uint32_t darwin_get_scene_fbo(int *w, int *h);
 void darwin_get_scene_size(int *w, int *h);
 bool darwin_scene_known();

@@ -1,4 +1,4 @@
-package com.subsetgames.ftl;
+package io.github.mrchrisster.ftlquest;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -67,8 +67,9 @@ static void init_darwin_rune_locale() {
     }
 }
 
-static std::string g_internal_storage = "/data/data/com.subsetgames.ftl/files";
-static std::string g_external_storage = "/sdcard/Android/data/com.subsetgames.ftl/files";
+static std::string g_internal_storage = "/data/data/io.github.mrchrisster.ftlquest/files";
+static std::string g_external_storage = "/sdcard/Android/data/io.github.mrchrisster.ftlquest/files";
+const char *darwin_files_dir() { return g_external_storage.c_str(); }
 
 extern "C" {
 
@@ -1361,7 +1362,7 @@ static void trace_frame_boundary(int frame) {
         LOGI("Diorama trace written (frame %d)", g_trace_frame);
     }
     if (g_trace_pending.exchange(false)) {
-        g_trace_fp = fopen("/sdcard/Android/data/com.subsetgames.ftl/files/trace.txt", "w");
+        g_trace_fp = fopen((std::string(darwin_files_dir()) + "/trace.txt").c_str(), "w");
         if (g_trace_fp) {
             g_trace_active = true;
             g_trace_frame = frame;

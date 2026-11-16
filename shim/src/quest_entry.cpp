@@ -26,7 +26,7 @@ static void *engine_bootstrap_thread(void *arg) {
 extern "C" {
 
 JNIEXPORT void JNICALL
-Java_com_subsetgames_ftl_MainActivity_nativeInit(
+Java_io_github_mrchrisster_ftlquest_MainActivity_nativeInit(
     JNIEnv *env,
     jobject thiz,
     jobject surface,
@@ -88,7 +88,7 @@ Java_com_subsetgames_ftl_MainActivity_nativeInit(
 }
 
 JNIEXPORT void JNICALL
-Java_com_subsetgames_ftl_MainActivity_nativeSetActivity(JNIEnv *env, jclass clazz, jobject activity) {
+Java_io_github_mrchrisster_ftlquest_MainActivity_nativeSetActivity(JNIEnv *env, jclass clazz, jobject activity) {
     (void)clazz;
 #if defined(FTL_ENABLE_OPENXR)
     static bool s_done = false;
@@ -103,18 +103,18 @@ Java_com_subsetgames_ftl_MainActivity_nativeSetActivity(JNIEnv *env, jclass claz
 }
 
 JNIEXPORT void JNICALL
-Java_com_subsetgames_ftl_MainActivity_nativeSurfaceDestroyed(JNIEnv *env, jobject thiz) {
+Java_io_github_mrchrisster_ftlquest_MainActivity_nativeSurfaceDestroyed(JNIEnv *env, jobject thiz) {
     (void)env; (void)thiz;
     quest_egl_surface_destroyed();
 }
 
 JNIEXPORT void JNICALL
-Java_com_subsetgames_ftl_MainActivity_nativeRenderFrame(JNIEnv *env, jobject thiz) {
+Java_io_github_mrchrisster_ftlquest_MainActivity_nativeRenderFrame(JNIEnv *env, jobject thiz) {
     // Rendering and eglSwapBuffers are driven by FTL's GL thread via EAGLContext presentRenderbuffer:
 }
 
 JNIEXPORT void JNICALL
-Java_com_subsetgames_ftl_MainActivity_nativeTouch(
+Java_io_github_mrchrisster_ftlquest_MainActivity_nativeTouch(
     JNIEnv *env,
     jobject thiz,
     jint pointer_id,
@@ -126,7 +126,7 @@ Java_com_subsetgames_ftl_MainActivity_nativeTouch(
 }
 
 JNIEXPORT void JNICALL
-Java_com_subsetgames_ftl_MainActivity_nativeGamepadButton(
+Java_io_github_mrchrisster_ftlquest_MainActivity_nativeGamepadButton(
     JNIEnv *env,
     jobject thiz,
     jint button_code,
@@ -136,7 +136,7 @@ Java_com_subsetgames_ftl_MainActivity_nativeGamepadButton(
 }
 
 JNIEXPORT void JNICALL
-Java_com_subsetgames_ftl_MainActivity_nativeGamepadAxis(
+Java_io_github_mrchrisster_ftlquest_MainActivity_nativeGamepadAxis(
     JNIEnv *env,
     jobject thiz,
     jint stick_id,

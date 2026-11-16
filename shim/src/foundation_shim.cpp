@@ -26,7 +26,7 @@ struct NSUserDefaults_impl {
     std::unordered_map<std::string, std::string> kv_store;
 };
 
-static NSBundle_impl g_main_bundle = { nullptr, "/sdcard/Android/data/com.subsetgames.ftl/files" };
+static NSBundle_impl g_main_bundle = { nullptr, "" };
 static NSUserDefaults_impl g_defaults = { nullptr, {} };
 
 extern "C" {
@@ -58,7 +58,7 @@ id nsbundle_main_bundle(void) {
 
 id nsbundle_resource_path(id bundle) {
     NSBundle_impl *b = (NSBundle_impl *)bundle;
-    return nsstring_create_with_utf8(b ? b->bundle_path.c_str() : "/sdcard/Android/data/com.subsetgames.ftl/files");
+    return nsstring_create_with_utf8(b && !b->bundle_path.empty() ? b->bundle_path.c_str() : darwin_files_dir());
 }
 
 id nsbundle_path_for_resource(id bundle, id name, id ext) {
@@ -67,9 +67,9 @@ id nsbundle_path_for_resource(id bundle, id name, id ext) {
 
     char full_path[1024];
     if (ext_str && strlen(ext_str) > 0) {
-        snprintf(full_path, sizeof(full_path), "/sdcard/Android/data/com.subsetgames.ftl/files/%s.%s", name_str, ext_str);
+        snprintf(full_path, sizeof(full_path), "%s/%s.%s", darwin_files_dir(), name_str, ext_str);
     } else {
-        snprintf(full_path, sizeof(full_path), "/sdcard/Android/data/com.subsetgames.ftl/files/%s", name_str);
+        snprintf(full_path, sizeof(full_path), "%s/%s", darwin_files_dir(), name_str);
     }
     LOGI("[NSBundle pathForResource] Requested '%s.%s' -> '%s'", name_str, ext_str, full_path);
     return nsstring_create_with_utf8(full_path);
@@ -133,9 +133,9 @@ void *NSSearchPathForDirectoriesInDomains(unsigned long directory, unsigned long
     g_search_paths.isa = objc_getClass("NSArray");
     g_search_paths.items.clear();
     if (directory == NSDocumentDirectory) {
-        g_search_paths.items.push_back(nsstring_create_with_utf8("/sdcard/Android/data/com.subsetgames.ftl/files/save"));
+        g_search_paths.items.push_back(nsstring_create_with_utf8((std::string(darwin_files_dir()) + "/save").c_str()));
     } else {
-        g_search_paths.items.push_back(nsstring_create_with_utf8("/sdcard/Android/data/com.subsetgames.ftl/files"));
+        g_search_paths.items.push_back(nsstring_create_with_utf8(darwin_files_dir()));
     }
     return (void *)&g_search_paths;
 }

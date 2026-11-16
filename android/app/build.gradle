@@ -10,15 +10,15 @@ def openxrInclude = new File(openxrDir, "prefab/modules/headers/include").canoni
 def openxrLib = new File(openxrDir, "jni/arm64-v8a/libopenxr_loader.so").canonicalPath
 
 android {
-    namespace "com.subsetgames.ftl"
+    namespace "io.github.mrchrisster.ftlquest"
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.subsetgames.ftl"
+        applicationId "io.github.mrchrisster.ftlquest"
         minSdk 29
         targetSdk 34
         versionCode 1
-        versionName "1.6.21"
+        versionName "0.1.0"
 
         ndk {
             abiFilters "arm64-v8a"

@@ -86,7 +86,7 @@ On macOS, `./deploy_quest.command` builds, installs and launches in one step, us
 - **Sorting draws into layers.** Every texture is tagged with the `ftl.dat` file it was loaded from, which works even with resource packs that change atlas sizes. The shim parses the archive index and matches each texture upload to the file it came from. The layer comes from the asset path: stars and planets, ship hulls, rooms and effects, crew sprites, or interface. Solid UI panels write a stencil, so crew portraits and icons drawn on top of them stay on the UI layer.
 - **OpenXR.** `quest_xr.cpp` runs inside the game's own present call. It copies the five layer textures into OpenXR swapchains (premultiplied alpha, sRGB) and submits them as stacked quads, plus the laser beam and cursor.
 
-Debug helpers: `adb shell touch /sdcard/Android/data/com.subsetgames.ftl/files/.trace_frame` writes a one-frame GL trace to `trace.txt`, and `./capture_planes.command` pulls the current frame and all five layers as PNGs.
+Debug helpers: `adb shell touch /sdcard/Android/data/io.github.mrchrisster.ftlquest/files/.trace_frame` writes a one-frame GL trace to `trace.txt`, and `./capture_planes.command` pulls the current frame and all five layers as PNGs.
 
 ## Known limitations
 

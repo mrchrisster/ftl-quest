@@ -4,7 +4,7 @@
 cd "$(dirname "$0")"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$ANDROID_HOME/platform-tools:/opt/homebrew/bin:/usr/local/bin:$PATH"
-F=/sdcard/Android/data/com.subsetgames.ftl/files
+F=/sdcard/Android/data/io.github.mrchrisster.ftlquest/files
 OUT="workspace/captures/$(date +%H%M%S)"
 mkdir -p "$OUT"
 exec > >(tee "$OUT/capture.log") 2>&1

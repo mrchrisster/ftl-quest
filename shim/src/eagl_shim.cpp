@@ -1,5 +1,7 @@
 #include "eagl_shim.h"
 #include "uikit_shim.h"
+#include "darwin_abi.h"
+#include <string>
 #include <atomic>
 #include <cstdio>
 #include <cstdlib>
@@ -200,6 +202,7 @@ void eagl_get_surface_size(int *width, int *height) {
 }
 
 static int g_swap_count = 0;
+static std::string files_path(const char *name) { return std::string(darwin_files_dir()) + "/" + name; }
 
 int eagl_present_renderbuffer(EAGLContextRef ctx, GLenum target) {
     (void)target;
@@ -240,7 +243,7 @@ int eagl_present_renderbuffer(EAGLContextRef ctx, GLenum target) {
             quest_inject_touch(0, s_tap_x, s_tap_y, UITouchPhaseEnded);
         }
     } else if ((g_swap_count % 10) == 0) {
-        const char *tap_path = "/sdcard/Android/data/com.subsetgames.ftl/files/.tap_cmd";
+        const std::string tap_path_s = files_path(".tap_cmd"); const char *tap_path = tap_path_s.c_str();
         if (access(tap_path, F_OK) == 0) {
             FILE *tf = fopen(tap_path, "r");
             if (tf) {
@@ -258,7 +261,7 @@ int eagl_present_renderbuffer(EAGLContextRef ctx, GLenum target) {
     GLenum err_blit = GL_NO_ERROR;
     uint8_t px_center[4] = {0, 0, 0, 0};
     int non_black = 0;
-    const char *trigger_path = "/sdcard/Android/data/com.subsetgames.ftl/files/.dump_frame";
+    const std::string trigger_path_s = files_path(".dump_frame"); const char *trigger_path = trigger_path_s.c_str();
     bool dump_now = (access(trigger_path, F_OK) == 0);
     bool sample = (g_swap_count < 3 || g_swap_count == 60 || dump_now);
 
@@ -288,7 +291,7 @@ int eagl_present_renderbuffer(EAGLContextRef ctx, GLenum target) {
                 uint8_t *img = (uint8_t *)malloc((size_t)w * (size_t)h * 4);
                 if (img) {
                     glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, img);
-                    const char *out_path = "/sdcard/Android/data/com.subsetgames.ftl/files/latest.ppm";
+                    const std::string out_path_s = files_path("latest.ppm"); const char *out_path = out_path_s.c_str();
                     FILE *fp = fopen(out_path, "wb");
                     if (fp) {
                         fprintf(fp, "P6\n%d %d\n255\n", w, h);
@@ -303,7 +306,7 @@ int eagl_present_renderbuffer(EAGLContextRef ctx, GLenum target) {
                     free(img);
                 }
                 if (darwin_planes_enabled()) {
-                    darwin_dump_planes("/sdcard/Android/data/com.subsetgames.ftl/files", g_swap_count);
+                    darwin_dump_planes(darwin_files_dir(), g_swap_count);
                 }
             }
         }
@@ -312,7 +315,7 @@ int eagl_present_renderbuffer(EAGLContextRef ctx, GLenum target) {
             glBindFramebuffer(GL_READ_FRAMEBUFFER, (GLuint)prev_read_fbo);
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, (GLuint)prev_draw_fbo);
             if ((g_swap_count % 30) == 0) {
-                const char *trace_path = "/sdcard/Android/data/com.subsetgames.ftl/files/.trace_frame";
+                const std::string trace_path_s = files_path(".trace_frame"); const char *trace_path = trace_path_s.c_str();
                 if (access(trace_path, F_OK) == 0) { unlink(trace_path); darwin_trace_request(); }
             }
             darwin_planes_frame_boundary();
@@ -342,8 +345,8 @@ int eagl_present_renderbuffer(EAGLContextRef ctx, GLenum target) {
              px_center[0], px_center[1], px_center[2], px_center[3], non_black);
     }
     if ((g_swap_count % 30) == 0) {
-        darwin_planes_request(access("/sdcard/Android/data/com.subsetgames.ftl/files/.planes", F_OK) == 0);
-        const char *trace_path = "/sdcard/Android/data/com.subsetgames.ftl/files/.trace_frame";
+        darwin_planes_request(access(files_path(".planes").c_str(), F_OK) == 0);
+        const std::string trace_path_s = files_path(".trace_frame"); const char *trace_path = trace_path_s.c_str();
         if (access(trace_path, F_OK) == 0) { unlink(trace_path); darwin_trace_request(); }
     }
     darwin_planes_frame_boundary();

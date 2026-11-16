@@ -16,7 +16,7 @@ WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IPA_PATH = sys.argv[1] if len(sys.argv) > 1 else os.path.join(WORKSPACE_DIR, "FTL_1.6.21_ios_8.0.ipa")
 
 INPUTS_DIR = os.path.join(WORKSPACE_DIR, "workspace", "inputs")
-QUEST_PACKAGE = "com.subsetgames.ftl"
+QUEST_PACKAGE = "io.github.mrchrisster.ftlquest"
 QUEST_TARGET_DIR = f"/sdcard/Android/data/{QUEST_PACKAGE}/files"
 
 def check_adb():
