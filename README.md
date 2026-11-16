@@ -1,14 +1,16 @@
-# FTL: Faster Than Light — Quest 3 Diorama Edition
+![FTL Diorama](docs/media/banner.png)
 
-**Play FTL in VR as a 2.5D diorama.** This is an unofficial native port of the iOS version of *FTL: Faster Than Light* (1.6.21) to Meta Quest 3. The game's frame is split into five depth layers and shown as stacked OpenXR panels: space at the back, ship hulls, rooms and weapons fire, crew, and the interface in front. Your ship floats over the starfield, crew walk a few centimetres above the deck plates, and the HUD hovers in front of it all.
+# FTL: Faster Than Light — Quest Diorama Edition
+
+**Play FTL in VR as a 2.5D diorama.** This is an unofficial native port of the iOS version of *FTL: Faster Than Light* (1.6.21) to Meta Quest headsets. The game's frame is split into five depth layers and shown as stacked OpenXR panels: space at the back, ship hulls, rooms and weapons fire, crew, and the interface in front. Your ship floats over the starfield, crew walk a few centimetres above the deck plates, and the HUD hovers in front of it all.
 
 The idea comes from the GBA diorama ports (WarioWare: Twisted!, Mother 3), applied to a full 2D strategy game.
 
-[![Gameplay video: FTL as a VR diorama on Quest 3](https://img.youtube.com/vi/0G6g1veP704/maxresdefault.jpg)](https://youtu.be/0G6g1veP704)
+[![Gameplay video: FTL as a VR diorama on Meta Quest](https://img.youtube.com/vi/0G6g1veP704/maxresdefault.jpg)](https://youtu.be/0G6g1veP704)
 
 ▶ **[Watch the gameplay video](https://youtu.be/0G6g1veP704)**
 
-![Combat on Quest 3](docs/media/combat.jpg)
+![Combat on Quest](docs/media/combat.jpg)
 
 ![The five depth layers](docs/media/diorama_layers.jpg)
 
@@ -20,8 +22,8 @@ The idea comes from the GBA diorama ports (WarioWare: Twisted!, Mother 3), appli
 ## Features
 
 - **Five-layer 3D diorama.** Choose 2D flat, 3D (6 cm between layers) or 3D deep (11 cm) at any time. Layers are perspective-matched, so the image lines up perfectly from your eyes.
-- **Native speed, no emulation.** The original ARM64 iOS binary runs directly on the Quest's CPU. A shim translates iOS (Darwin, UIKit, EAGL, Objective-C) to Android, EGL and OpenXR.
-- **Immersive OpenXR app.** Five quad layers rendered straight from the game's own GL context, 120 Hz display (FTL's 60 fps at a clean 2:1), sRGB-correct colours.
+- **Native speed, no emulation.** The original ARM64 iOS binary runs directly on the headset's CPU. A shim translates iOS (Darwin, UIKit, EAGL, Objective-C) to Android, EGL and OpenXR.
+- **Immersive OpenXR app.** Five quad layers rendered straight from the game's own GL context, 60 or 120 Hz display (a clean cadence for FTL's 60 fps), sRGB-correct colours.
 - **Laser-pointer controls.** Point and pull the trigger to tap. The pointer picks the layer you actually see under it, so buttons hit where they appear even with depth on.
 - **Dedicated buttons** for pause, doors and system power, so you don't have to hunt for small icons mid-fight.
 - **Grab and place.** Hold a grip to pick the game screen up and put it anywhere in your room.
@@ -44,17 +46,17 @@ The idea comes from the GBA diorama ports (WarioWare: Twisted!, Mother 3), appli
 
 ## Install
 
-You need a Quest 3 (Quest 2 / 3S / Pro should also work, but are untested) in developer mode, `adb`, and your own FTL iOS app (`.ipa`, version 1.6.21).
+You need a Meta Quest headset in developer mode (developed on Quest 3; Quest 2, 3S and Pro should work too), `adb`, and your own FTL iOS app (`.ipa`, version 1.6.21).
 
 1. **Install the APK** from [Releases](../../releases):
    ```bash
-   adb install -r ftl-quest3.apk
+   adb install -r ftl-quest.apk
    ```
 2. **Copy your game files to the headset.** The helper extracts the game binary (`FTL`) and `ftl.dat` from your IPA and pushes them to `/sdcard/Android/data/com.subsetgames.ftl/files/`:
    ```bash
    python3 tools/deploy_quest.py path/to/FTL.ipa
    ```
-3. Launch **FTL: Faster Than Light** from *Unknown Sources* in your Quest library.
+3. Launch **FTL: Faster Than Light** from your Quest library. It's tagged as a game; sideloaded apps also always appear under *Unknown Sources*.
 
 ## Build from source
 
@@ -91,4 +93,5 @@ Debug helpers: `adb shell touch /sdcard/Android/data/com.subsetgames.ftl/files/.
 
 - *FTL: Faster Than Light* by Subset Games. Buy it, it's wonderful.
 - The diorama layering and OpenXR quad stack were inspired by the WarioWare: Twisted! and Mother 3 GBA recomp Quest ports.
+- Logo: original artwork made for this port (`tools/branding/make_logo.py`).
 - OpenXR loader © The Khronos Group (Apache-2.0), downloaded at build time.
